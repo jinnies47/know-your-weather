@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
-    />
-    <title>Know your Weather</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <img src="Weather.jpg" class="card-img" alt="..." />
-    <div class="card-img-overlay">
-          <div class="input">
-            <input type="text" placeholder="Enter the city Name" class="input_text">
-            <input type="submit" value="Submit" class="submit btn-success">
-             </div>
-             <div class="container">
-                <h1 class="name" id="name"></h1>
-                <p class="temp"></p>
-                <p class="desc"></p>
-              </div>
-              </div>
-          <script src="script.js"></script>
-  </body>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Check Weather</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    
+</head>
+<body style="background-image: url(bkg2.jpg); background-repeat: no-repeat; background-size: cover; background-attachment: fixed;">
+    <div class="main" style="border-radius: 5%;">
+        <div class="input">
+            <input type="text" id="input-box" class="input-box" placeholder="Enter city">
+        </div>
+
+        <div class="weather-body">
+            <div class="location">
+                <div class="city" id="city">City</div>
+                <div class="date" id="date">Date</div>
+            </div>
+
+            <div class="weather-status">
+                <div class="temp" id="temp">-&deg;C</div>
+                <div class="weather" id="weather">Weather</div>
+                <div class="img" id="img"></div>
+            </div>
+        </div>
+       
+    </div>
+
+    <script src='script.js'></script>
+</body>
 </html>
