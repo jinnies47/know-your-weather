@@ -1,22 +1,51 @@
-var input=document.querySelector('.input_text')
-var main = document.querySelector('#name');
-var temp = document.querySelector('.temp');
-var desc = document.querySelector('.desc');
-var button= document.querySelector('.submit');
 
-button.addEventListener('click', function(name){
-fetch('https://api.openweathermap.org/data/2.5/weather?q='+input.value+'&APPID=6b6206b123decbc4e10e2f44e2be261c')
+const api = {
+    key: "c165dd52e51a1693927aa507c55c2d57",
+    baseurl: "https://api.openweathermap.org/data/2.5/"
+}
 
-.then(response => response.json())
-.then(data => {
-  var tempValue = data['main']['temp'];
-  var nameValue = data['name'];
-  var descValue = data['weather'][0]['description'];
+const searchbox = document.querySelector('.input-box');
+searchbox.addEventListener('keypress', setQuery);
 
-  main.innerHTML = nameValue;
-  desc.innerHTML = "Desc - "+descValue;
-  temp.innerHTML = "Temp - "+Math.round(tempValue-273)+'\u00B0'+"C";
-})
+function setQuery(evt){
+    if(evt.keyCode == 13){
+        getResults(searchbox.value);
+        
+    }
+}
 
-.catch(err => alert("Invalid city name!"));
-})
+function getResults(query){
+    fetch(`${api.baseurl}weather?q=${query}&units=metric&APPID=${api.key}`)
+    .then(weather => {
+        return weather.json();
+    }).then(displayResults);
+
+}
+
+function displayResults(weather){
+    console.log(weather);
+    let city = document.querySelector('.location .city')
+    city.innerText = `${weather.name}, ${weather.sys.country}`;
+
+    let now = new Date();
+    let date = document.querySelector('.location .date');
+    date.innerText = dateBuilder(now);
+
+    let temp2 = document.querySelector('.current .temp');
+    temp.innerHTML = `${Math.round(weather.main.temp)}&degC`;
+
+    let weatherType = document.getElementById('weather');
+    weatherType.innerHTML = `${weather.weather[0].main}`;
+}
+
+function dateBuilder(d){
+    let months = ["Jan","Feb","March","April","May","June","July","August","Sept","Oct","Nov","Dec",];
+    let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday",];
+
+    let day = days[d.getDay()];
+    let date = d.getDate();
+    let month = months[d.getMonth()];
+    let year = d.getFullYear();
+
+    return `${day} ${date} ${month} ${year}`;
+}
